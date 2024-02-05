@@ -1,5 +1,13 @@
 import { createHash } from "node:crypto"
-import { exhaustiveCheck, validateArray } from "~/utils/validation.js"
+import {
+    exhaustiveCheck,
+    isArrayOf,
+    isBoolean,
+    isDate,
+    isNumber,
+    isString,
+    validateField,
+} from "~/utils/validation.js"
 import type { FieldAttributes, FieldType, FieldTypeMap } from "./field.js"
 import { Field } from "./field.js"
 
@@ -21,73 +29,7 @@ export class Schema<T extends Record<string, FieldType>> {
 
         for (const key in this.fields) {
             const field = this.fields[key]
-
-            // validate the schema definition
-            switch (field.type) {
-                case "string": {
-                    if (
-                        field.defaultValue !== undefined &&
-                        !(typeof field.defaultValue === "string")
-                    ) {
-                        throw new Error("Invalid default value for string type")
-                    }
-                    break
-                }
-                case "string[]": {
-                    if (
-                        field.defaultValue !== undefined &&
-                        !validateArray(field.defaultValue, (v) => typeof v === "string")
-                    ) {
-                        throw new Error("Invalid default value for string[] type")
-                    }
-                    break
-                }
-                case "number": {
-                    if (
-                        field.defaultValue !== undefined &&
-                        !(typeof field.defaultValue === "number")
-                    ) {
-                        throw new Error("Invalid default value for number type")
-                    }
-                    break
-                }
-                case "number[]": {
-                    if (
-                        field.defaultValue !== undefined &&
-                        !validateArray(field.defaultValue, (v) => typeof v === "number")
-                    ) {
-                        throw new Error("Invalid default value for number[] type")
-                    }
-                    break
-                }
-                case "boolean": {
-                    if (
-                        field.defaultValue !== undefined &&
-                        !(typeof field.defaultValue === "boolean")
-                    ) {
-                        throw new Error("Invalid default value for boolean type")
-                    }
-                    break
-                }
-                case "date": {
-                    if (field.defaultValue !== undefined && !(field.defaultValue instanceof Date)) {
-                        throw new Error("Invalid default value for date type")
-                    }
-                    break
-                }
-                case "text": {
-                    if (
-                        field.defaultValue !== undefined &&
-                        !(typeof field.defaultValue === "string")
-                    ) {
-                        throw new Error("Invalid default value for text type")
-                    }
-                    break
-                }
-                default: {
-                    exhaustiveCheck(field.type, `Invalid schema type: ${field.type}`)
-                }
-            }
+            validateField(field.defaultValue, field.type)
         }
     }
 
