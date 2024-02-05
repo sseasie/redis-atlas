@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "target": "ESNext",
+      "allowJs": true,
+      "resolveJsonModule": true,
+      "moduleDetection": "force",
+      "isolatedModules": true,
+      "strict": true,
+      "noUncheckedIndexedAccess": true,
+      "strictNullChecks": true,
+      "moduleResolution": "NodeNext",
+      "noEmit": true,
+      "module": "NodeNext",
+      "lib": [ "ESNext" ],
+      "paths": { "~/*": ["./src/*"] },
+    },
+    "include": [
+      "src/**/*"
+    ]
+  }

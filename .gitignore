@@ -1,0 +1,9 @@
+# node
+node_modules/
+dist/
+
+# environment
+.env*
+
+# misc
+playground.ts

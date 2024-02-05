@@ -1,0 +1,36 @@
+{
+    "name": "redischema",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        "import": {
+            "types": "./dist/index.d.mts",
+            "default": "./dist/index.mjs"
+        },
+        "require": {
+            "types": "./dist/index.d.cts",
+            "default": "./dist/index.cjs"
+        }
+    },
+    "scripts": {
+        "build": "bunchee -m",
+        "test": "node --import tsx/esm --env-file .env ./playground.ts",
+        "lint": "biome lint .",
+        "format": "biome format --write ."
+    },
+    "peerDependencies": {
+        "redis": "^4.6.12"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.5.3",
+        "@types/node": "^20.11.16",
+        "bunchee": "^4.4.5",
+        "tsx": "^4.7.0",
+        "typescript": "^5.3.3"
+    },
+    "dependencies": {
+        "nanoid": "^5.0.5"
+    }
+}
