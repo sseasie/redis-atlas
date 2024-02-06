@@ -15,8 +15,8 @@
     "scripts": {
         "build": "bunchee -m",
         "test": "node --import tsx/esm --env-file .env ./playground.ts",
-        "lint": "biome lint .",
-        "format": "biome format --write ."
+        "lint": "biome lint ./src",
+        "format": "biome format --write ./src"
     },
     "peerDependencies": {
         "redis": "^4.6.12"
